@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="mobile-container">
+
+    <div class="top">
+        <h1>Cleaning App</h1>
+        <p>Currently logged in as:</p>
+        <select id="user-dropdown">
+        </select>
+    </div>
+
+    <nav class="tabs">
+        <a href="" class="tab-button active" data-tab="today">Today</a>
+        <a href="" class="tab-button" data-tab="tasks">Tasks</a>
+        <a href="" class="tab-button" data-tab="leaderboard">Leaderboard</a>
+    </nav>
+
+
+
+    <div class="today" id="today">
+        <div class="today-tasks">
+            <h3>Today's tasks:</h3>
+            <div class="task-list-today"><ul></ul></div>
+        </div>
+        <div class="user-tasks">
+            <h3>Your tasks:</h3>
+            <div class="task-list-user"><ul></ul></div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="tasks" id="tasks">
+        <h3>All tasks:</h3>
+        <div class="all-tasks"><ul></ul></div>
+
+        <h4>Add a new task:</h4>
+        <form>
+            <input id="task-name" type="text" required placeholder="Task name">
+            <input id="task-points" type="number" required placeholder="Points">
+            <button class="add-task" type="button">Add Task</button>
+        </form>
+    </div>
+
+
+
+
+
+    <div class="leaderboard" id="leaderboard">
+        <h3>Leaderboard:</h3>
+        <div class="leaderboard-list"><ol></ol></div>
+        <!-- 
+        <h4>Add a new user:</h4>
+        <form id="form-add-user">
+            <input id="user-name" type="text" required placeholder="User name">
+            <button class="add-user" type="button">Add User</button>
+        </form> 
+        -->
+    </div>
+
+
+</div>
+    <script src="script.js" defer></script>
+</body> 
+</html>

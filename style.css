@@ -1,0 +1,66 @@
+body {
+  margin: 50;
+  padding: 50;
+  font-family: Arial, sans-serif;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-container {
+  width: 375px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+
+
+/* NAVIGATION TABS */
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 5px;
+}
+
+.tabs button,
+.tab-button {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tabs .active,
+.tab-button.active {
+  background: white;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
+.today, .tasks, .leaderboard, .top {
+    padding: 10px;
+}
+
+
+.leaderboard ol button, .tasks ul button, .today ul button {
+    margin-left: 10px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
