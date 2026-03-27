@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="mobile-container">
+
+    <div class="top">
+        <h1>Cleaning App</h1>
+        <p>Currently logged in as: <span id="current-user-display"></span></p>
+        <select id="user-dropdown">
+        </select>
+        <button id="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <nav class="tabs">
+        <a href="" class="tab-button active" data-tab="today">Today</a>
+        <a href="" class="tab-button" data-tab="tasks">Tasks</a>
+        <a href="" class="tab-button" data-tab="leaderboard">Leaderboard</a>
+        <a href="" class="tab-button" data-tab="profile">Profile</a>
+    </nav>
+
+
+
+    <div class="today" id="today">
+        <div class="today-tasks">
+            <h3>Today's tasks:</h3>
+            <div class="task-list-today"><ul></ul></div>
+        </div>
+        <div class="user-tasks">
+            <h3>Your tasks:</h3>
+            <div class="task-list-user"><ul></ul></div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="tasks" id="tasks">
+        <h3>All tasks:</h3>
+        <div class="all-tasks"><ul></ul></div>
+
+        <h4>Add a new task:</h4>
+        <form>
+            <input id="task-name" type="text" required placeholder="Task name">
+            <input id="task-points" type="number" required placeholder="Points">
+            <button class="add-task" type="button">Add Task</button>
+        </form>
+    </div>
+
+
+
+
+
+    <div class="leaderboard" id="leaderboard">
+        <h3>Leaderboard:</h3>
+        <div class="leaderboard-list"><ol></ol></div>
+    </div>
+
+    <div class="profile" id="profile">
+        <h3>Profile</h3>
+        <div class="profile-info">
+            <ul>
+                <li><strong>Name:</strong> <span id="profile-name"></span> <button class="edit-btn" onclick="openEditName()">✏️</button></li>
+                <li><strong>Username:</strong> <span id="profile-username"></span> <button class="edit-btn" onclick="openEditUsername()">✏️</button></li>
+                <li><strong>Points:</strong> <span id="profile-points"></span></li>
+                <li>
+                    <strong>Family:</strong> <span id="profile-family" onclick="toggleFamilyMembers()" style="cursor: pointer; text-decoration: underline;"></span> <button class="edit-btn" onclick="openEditFamily()">✏️</button>
+                    <ul id="family-members-list" class="family-members-list" style="display:none;"></ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Modal for editing name -->
+        <div id="edit-name-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditName()">&times;</span>
+                <h5>Edit Name</h5>
+                <input id="edit-name-input" type="text" placeholder="New name">
+                <button onclick="saveName()">Save</button>
+                <button onclick="closeEditName()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Modal for editing username -->
+        <div id="edit-username-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditUsername()">&times;</span>
+                <h5>Edit Username</h5>
+                <input id="edit-username-input" type="text" placeholder="New username">
+                <button onclick="saveUsername()">Save</button>
+                <button onclick="closeEditUsername()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Modal for editing family -->
+        <div id="edit-family-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditFamily()">&times;</span>
+                <h5>Change Family</h5>
+                <select id="edit-family-select">
+                    <option value="">Select a family</option>
+                </select>
+                <button onclick="saveFamily()">Save</button>
+                <button onclick="closeEditFamily()">Cancel</button>
+            </div>
+        </div>
+
+        <h4>Add New Family</h4>
+        <div class="profile-section">
+            <input id="profile-new-family" type="text" placeholder="Family name">
+            <button type="button" onclick="createFamily()">Add Family</button>
+        </div>
+
+        <h4>Recent Tasks (Last 10):</h4>
+        <div class="profile-recent-tasks"><ul></ul></div>
+    </div>
+
+    <!-- Modal for assigning tasks -->
+    <div id="assign-task-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAssignTaskModal()">&times;</span>
+            <h5>Assign Task</h5>
+            <label for="assign-date">Date:</label>
+            <input id="assign-date" type="date" required>
+            <label for="assign-user">Assign to user:</label>
+            <select id="assign-user" required>
+                <option value="">Select a user</option>
+            </select>
+            <button onclick="confirmAssignTask()">Assign</button>
+            <button onclick="closeAssignTaskModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Modal for deleting tasks -->
+    <div id="delete-task-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteTaskModal()">&times;</span>
+            <h5>Delete Task</h5>
+            <p>Are you sure you want to delete "<span id="delete-task-name"></span>"?</p>
+            <button onclick="confirmDeleteTask()" style="background: #f44336;">Delete</button>
+            <button onclick="closeDeleteTaskModal()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+    <script src="script.js" defer></script>
+</body> 
+</html>

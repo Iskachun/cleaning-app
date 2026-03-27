@@ -1,0 +1,242 @@
+body {
+  margin: 50;
+  padding: 50;
+  font-family: Arial, sans-serif;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-container {
+  width: 500px;
+  max-width: 100%;
+  height: 80vh;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* NAVIGATION TABS */
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 5px;
+}
+
+.tabs button,
+.tab-button {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tabs .active,
+.tab-button.active {
+  background: white;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
+.today, .tasks, .leaderboard, .top, .profile {
+    padding: 10px;
+}
+
+
+.leaderboard ol button, .tasks ul button, .today ul button {
+    margin-left: 10px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* PROFILE STYLING */
+.profile-info {
+    margin: 15px 0;
+}
+
+.profile-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.profile-info li {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    font-weight: normal;
+}
+
+.profile-info strong {
+    font-weight: 600;
+}
+
+.profile-section {
+    background: #f9f9f9;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 5px;
+    border-left: 3px solid #ddd;
+}
+
+.profile-section h5 {
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-section input,
+.profile-section select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.profile-section button {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.profile-section button:hover {
+    background: #45a049;
+}
+
+/* MODAL STYLING */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal[style*="display: block"] {
+    display: flex !important;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h5 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.modal-content input,
+.modal-content select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.modal-content button {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.modal-content button:hover {
+    background: #45a049;
+}
+
+.modal-content button[style*="background: #f44336"] {
+    background: #f44336 !important;
+}
+
+.modal-content button[style*="background: #f44336"]:hover {
+    background: #da190b !important;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* EDIT BUTTONS */
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0 4px;
+    color: #666;
+    margin-left: 8px;
+}
+
+.edit-btn:hover {
+    color: #000;
+}
+
+#family-members-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 10px 0 0 0;
+}
+
+#family-members-list li {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
