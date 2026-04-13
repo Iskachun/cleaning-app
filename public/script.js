@@ -242,18 +242,69 @@ displaytasks();
 
 
 async function displayLeaderboard() {
-    leaderboard.innerHTML = '';
+    // Display all users leaderboard
+    const allLeaderboardList = document.querySelector('#leaderboard-all .leaderboard-list ol');
+    allLeaderboardList.innerHTML = '';
     const response = await fetch('/getUsers');
-    const users  = await response.json();
+    const users = await response.json();
     for (let user of users) {
-        const li = document.createElement('li');
         if (user.Name === "N/A") continue;
-
-        li.textContent = `${user.Name} - ${user.Points} points`;
-        
-        leaderboard.appendChild(li);
+        const li = document.createElement('li');
+        li.textContent = `${user.Name} (${user.Username}) - ${user.Points} points`;
+        allLeaderboardList.appendChild(li);
+    }
+    
+    // Display family leaderboard
+    const familyLeaderboardContainer = document.getElementById('leaderboard-family');
+    const familyLeaderboardList = document.querySelector('#leaderboard-family .leaderboard-list ol');
+    familyLeaderboardList.innerHTML = '';
+    
+    const familyResponse = await fetch('/getFamilyLeaderboard');
+    const familyData = await familyResponse.json();
+    
+    // Update family header
+    const familyHeader = familyLeaderboardContainer.querySelector('h4') || document.createElement('h4');
+    if (!familyLeaderboardContainer.querySelector('h4')) {
+        familyLeaderboardContainer.insertBefore(familyHeader, familyLeaderboardContainer.querySelector('.leaderboard-list'));
+    }
+    
+    if (!familyData.users || familyData.users.length === 0) {
+        familyHeader.textContent = 'Family - (Not in a family)';
+        const li = document.createElement('li');
+        li.textContent = 'You are not part of a family';
+        familyLeaderboardList.appendChild(li);
+    } else {
+        familyHeader.textContent = `Family - ${familyData.familyName}`;
+        for (let user of familyData.users) {
+            if (user.Name === "N/A") continue;
+            const li = document.createElement('li');
+            li.textContent = `${user.Name} (${user.Username}) - ${user.Points} points`;
+            familyLeaderboardList.appendChild(li);
+        }
     }
 }
+
+// Auto-refresh leaderboard every 5 seconds
+setInterval(displayLeaderboard, 5000);
+
+function switchLeaderboard(view) {
+    // Hide all views
+    document.getElementById('leaderboard-all').classList.remove('active');
+    document.getElementById('leaderboard-family').classList.remove('active');
+    
+    // Remove active class from all buttons
+    document.querySelectorAll('.leaderboard-tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Show selected view and set active button
+    if (view === 'all') {
+        document.getElementById('leaderboard-all').classList.add('active');
+        document.querySelectorAll('.leaderboard-tab-btn')[0].classList.add('active');
+    } else if (view === 'family') {
+        document.getElementById('leaderboard-family').classList.add('active');
+        document.querySelectorAll('.leaderboard-tab-btn')[1].classList.add('active');
+    }
+}
+
 displayLeaderboard();
 
 document.querySelector('.add-task').addEventListener('click', addTask);
@@ -662,6 +713,13 @@ async function first_display() {
     document.getElementById('leaderboard').style.display = 'none';
     document.getElementById('profile').style.display = 'none';
     document.getElementById(savedTab).style.display = 'block';
+    
+    // Initialize leaderboard with "All Users" view active
+    if (savedTab === 'leaderboard') {
+        document.getElementById('leaderboard-all').classList.add('active');
+        document.querySelectorAll('.leaderboard-tab-btn')[0].classList.add('active');
+        displayLeaderboard();
+    }
     
     // Load profile data if profile tab is the saved tab
     if (savedTab === 'profile') {

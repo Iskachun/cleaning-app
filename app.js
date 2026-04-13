@@ -82,6 +82,30 @@ app.get('/getUserRecentTasks', (req, res) => {
     res.json(tasks);
 });
 
+app.get('/getFamilyLeaderboard', (req, res) => {
+    if (!req.session || !req.session.user) {
+        return res.status(401).json({ error: 'Not logged in' });
+    }
+    
+    // Get current user's family ID
+    const currentUser = db.prepare('SELECT Family FROM Users WHERE ID = ?').get(req.session.user.id);
+    
+    // Get ALL users (not filtered by family)
+    const allUsers = db.prepare('SELECT Name, Points, ID, Username, Family FROM Users WHERE Name != \'N/A\' ORDER BY Points DESC, Name').all();
+    
+    // Filter to only users in the same family as current user
+    const familyUsers = allUsers.filter(user => user.Family === currentUser.Family && currentUser.Family !== null);
+    
+    // Get family name if user has a family
+    let familyName = null;
+    if (currentUser.Family) {
+        const family = db.prepare('SELECT Name FROM Family WHERE ID = ?').get(currentUser.Family);
+        familyName = family ? family.Name : null;
+    }
+    
+    res.json({ familyName, users: familyUsers });
+});
+
 app.post('/updateUserProfile', (req, res) => {
     if (!req.session || !req.session.user) {
         return res.status(401).json({ error: 'Not logged in' });
@@ -211,8 +235,7 @@ ORDER BY Date ASC').all();
 });
 
 app.get('/getUsers', (req, res) => {
-    const rows = db.prepare('SELECT Name, Points, ID, Username, Password FROM Users \
-ORDER BY Points DESC, Name').all();
+    const rows = db.prepare('SELECT Name, Points, ID, Username, Password FROM Users WHERE Name != \'N/A\' ORDER BY Points DESC, Name').all();
     res.json(rows);
 });
 

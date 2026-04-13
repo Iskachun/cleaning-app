@@ -60,7 +60,16 @@
 
     <div class="leaderboard" id="leaderboard">
         <h3>Leaderboard:</h3>
-        <div class="leaderboard-list"><ol></ol></div>
+        <div class="leaderboard-tabs">
+            <button class="leaderboard-tab-btn active" onclick="switchLeaderboard('all')">All Users</button>
+            <button class="leaderboard-tab-btn" onclick="switchLeaderboard('family')">Family Only</button>
+        </div>
+        <div id="leaderboard-all" class="leaderboard-view">
+            <div class="leaderboard-list"><ol></ol></div>
+        </div>
+        <div id="leaderboard-family" class="leaderboard-view" style="display:none;">
+            <div class="leaderboard-list"><ol></ol></div>
+        </div>
     </div>
 
     <div class="profile" id="profile">
